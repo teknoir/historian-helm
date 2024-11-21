@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: historian-api
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: historian-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: historian-api
+  template:
+    metadata:
+      labels:
+        app: historian-api
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "8000"
+    spec:
+      containers:
+        - name: historian-api
+          image: us-docker.pkg.dev/teknoir/gcr.io/historian-api:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          env:
+            - name: USERNAME
+              value: 'teknoir'
+            - name: PASSWORD
+              value: 'teknoirpassword'
+            - name: DOMAIN
+              value: 'historian-db'
+            - name: PORT
+              value: '27017'
+            - name: DATABASE
+              value: 'historian'
+            - name: DEFAULT_TTL_SECONDS
+              value: '2678400'

@@ -1,0 +1,54 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: historian-db
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: historian-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: historian-db
+  template:
+    metadata:
+      labels:
+        app: historian-db
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "9216"
+    spec:
+      containers:
+        - name: mongodb-exporter
+          image: docker.io/bitnami/mongodb-exporter:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9216
+          args: ["--mongodb.uri=mongodb://teknoir:teknoirpassword@mongodb:27017/admin", "--discovering-mode", "--collect-all", "--compatible-mode"]
+        - name: mongodb
+          image: mongo:latest
+          imagePullPolicy: Always
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: teknoir
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: teknoirpassword
+            - name: MONGO_INITDB_DATABASE
+              value: historian
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: db
+              mountPath: /data/db
+            - name: init-database
+              mountPath: /docker-entrypoint-initdb.d/
+      volumes:
+        - name: db
+          hostPath:
+            path: /opt/teknoir/historian/db
+            type: DirectoryOrCreate
+        - name: init-database
+          configMap:
+            name: historian-db

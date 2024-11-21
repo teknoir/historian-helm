@@ -1,0 +1,79 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: historian-db
+  namespace: {{ .Release.Namespace }}
+data:
+  create_collections.js: |
+    // GENERAL SETTINGS
+    const default_expiration_seconds = 300; //5 minutes
+
+    db.setProfilingLevel(2, {
+        sampleRate: 0.2
+    })
+
+    //COLLECTIONS
+
+    //alerts collection
+    db.createCollection(
+        "alerts")
+
+    db.alerts.createIndex({
+        "last_modification": -1
+    }, {
+        expireAfterSeconds: default_expiration_seconds
+    })
+
+    db.alerts.createIndex({
+        "start_time": -1
+    })
+
+    db.alerts.createIndex({
+        "sent": -1
+    })
+
+    db.alerts.createIndex({
+        "detection.id": -1,
+        "type": -1
+    })
+
+    db.alerts.createIndex({
+        "sent": -1,
+        "end_time": -1
+    })
+
+    //movements collection
+    db.createCollection(
+        "movements")
+
+    db.movements.createIndex({
+        "last_modification": -1
+    }, {
+        expireAfterSeconds: default_expiration_seconds
+    })
+
+    db.movements.createIndex({
+        "start_time": -1
+    })
+
+    db.movements.createIndex({
+        "detection.id": -1,
+        "type": -1
+    })
+
+    //detections collection
+    db.createCollection("detections", {
+        capped: true,
+        size: 5242880,
+        max: 5000
+    })
+
+    db.detections.createIndex({
+        "timestamp": -1
+    })
+
+    db.detections.createIndex({
+        "type": -1,
+        "detection.id": -1
+    })
