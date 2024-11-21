@@ -13,7 +13,7 @@ apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
   name: historian
-  namespace: kube-system
+  namespace: default
 spec:
   repo: https://teknoir.github.io/historian-helm
   chart: historian
