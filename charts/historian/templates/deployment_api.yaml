@@ -42,3 +42,5 @@ spec:
               value: 'historian'
             - name: DEFAULT_TTL_SECONDS
               value: '2678400'
+          resources:
+            {{- toYaml $.Values.resources | nindent 12 }}

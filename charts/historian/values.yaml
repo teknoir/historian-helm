@@ -2,3 +2,10 @@
 
 annotations:
   teknoir.org/managed-by: devstudio
+resources:
+  limits:
+    cpu: 2000m
+    memory: 2048Mi
+  requests:
+    cpu: 200m
+    memory: 128Mi
