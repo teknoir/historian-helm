@@ -4,6 +4,8 @@ kind: ConfigMap
 metadata:
   name: historian-db
   namespace: {{ .Release.Namespace }}
+  annotations:
+    {{- toYaml $.Values.annotations | nindent 4 }}
 data:
   create_collections.js: |
     // GENERAL SETTINGS

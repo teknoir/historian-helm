@@ -1,3 +1,4 @@
 # Values needed for Historian
 
-# TBD
+annotations:
+  teknoir.org/managed-by: devstudio
