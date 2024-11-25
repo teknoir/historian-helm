@@ -79,3 +79,12 @@ data:
         "type": -1,
         "detection.id": -1
     })
+
+    //movements collection
+    db.createCollection(
+        "alerts_heatmap_grids")
+
+    db.alerts_heatmap_grids.createIndex({
+        "peripheralId": -1,
+        "type": -1
+    })
