@@ -24,12 +24,14 @@ spec:
         {{- toYaml $.Values.annotations | nindent 8 }}
     spec:
       containers:
+        {{- if .Values.metricsExporter.enabled }}
         - name: mongodb-exporter
           image: docker.io/bitnami/mongodb-exporter:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 9216
-          args: ["--mongodb.uri=mongodb://teknoir:teknoirpassword@mongodb:27017/admin", "--discovering-mode", "--collect-all", "--compatible-mode"]
+          args: ["--mongodb.uri=mongodb://teknoir:teknoirpassword@localhost:27017/admin", "--discovering-mode", "--collect-all", "--compatible-mode"]
+        {{- end }}
         - name: mongodb
           image: mongo:latest
           imagePullPolicy: Always

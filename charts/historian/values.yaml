@@ -1,4 +1,6 @@
 # Values needed for Historian
+metricsExporter:
+  enabled: false
 
 annotations:
   teknoir.org/managed-by: devstudio
