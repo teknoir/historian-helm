@@ -2,6 +2,10 @@
 metricsExporter:
   enabled: false
 
+image:
+  repository: mongo
+  tag: 7.0.15
+    
 annotations:
   teknoir.org/managed-by: devstudio
 resources:

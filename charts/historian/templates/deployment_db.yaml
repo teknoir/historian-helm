@@ -26,14 +26,14 @@ spec:
       containers:
         {{- if .Values.metricsExporter.enabled }}
         - name: mongodb-exporter
-          image: docker.io/bitnami/mongodb-exporter:latest
+          image: docker.io/bitnami/mongodb-exporter:0.42.1
           imagePullPolicy: Always
           ports:
             - containerPort: 9216
           args: ["--mongodb.uri=mongodb://teknoir:teknoirpassword@localhost:27017/admin", "--discovering-mode", "--collect-all", "--compatible-mode"]
         {{- end }}
         - name: mongodb
-          image: mongo:latest
+          image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag }}"
           imagePullPolicy: Always
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
