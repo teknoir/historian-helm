@@ -1,4 +1,9 @@
 # Values needed for Historian
+
+# Deprecated: only here for backwards compatibility
+historianApi:
+  enabled: false
+
 metricsExporter:
   enabled: false
 
@@ -15,3 +20,6 @@ resources:
   requests:
     cpu: 200m
     memory: 128Mi
+nodePort:
+  enabled: false
+  nodePort: 31017

@@ -9,11 +9,14 @@ metadata:
   annotations:
     {{- toYaml $.Values.annotations | nindent 4 }}
 spec:
-  type: ClusterIP
+  type: {{ if .Values.nodePort.enabled }}NodePort{{ else }}ClusterIP{{ end }}
   ports:
     - name: tcp-native
       port: 27017
       protocol: TCP
       targetPort: 27017
+      {{- if .Values.nodePort.enabled }}
+      nodePort: {{ .Values.nodePort.nodePort }}
+      {{- end }}
   selector:
     app: historian-db

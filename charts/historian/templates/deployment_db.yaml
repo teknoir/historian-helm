@@ -30,7 +30,7 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 9216
-          args: ["--mongodb.uri=mongodb://teknoir:teknoirpassword@localhost:27017/admin", "--discovering-mode", "--collect-all", "--compatible-mode"]
+          args: ["--mongodb.uri=mongodb://teknoir:teknoirpassword@127.0.0.1:27017/admin", "--discovering-mode", "--collect-all", "--compatible-mode"]
         {{- end }}
         - name: mongodb
           image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag }}"

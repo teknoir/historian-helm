@@ -1,3 +1,5 @@
+# Deprecated
+{{- if .Values.historianApi.enabled }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -44,3 +46,4 @@ spec:
               value: '2678400'
           resources:
             {{- toYaml $.Values.resources | nindent 12 }}
+  {{- end }}
