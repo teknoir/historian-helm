@@ -3,6 +3,16 @@ entries:
   historian:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2024-11-26T10:10:59.876548573Z"
+    description: A Helm chart for Historian
+    digest: 0a686dd00960cdfb7f6eaffe67aea166b9ea171a04f402c8d7321a330e3427c4
+    name: historian
+    type: application
+    urls:
+    - https://github.com/teknoir/historian-helm/releases/download/historian-0.1.0/historian-0.1.0.tgz
+    version: 0.1.0
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2024-11-25T12:05:04.809434887Z"
     description: A Helm chart for Historian
     digest: 33709a7f913aad952a288993f24adaddb4abcbcd731ebb305ba84875a372de67
@@ -71,4 +81,4 @@ entries:
     urls:
     - https://github.com/teknoir/historian-helm/releases/download/historian-0.0.1/historian-0.0.1.tgz
     version: 0.0.1
-generated: "2024-11-25T12:05:04.809473179Z"
+generated: "2024-11-26T10:10:59.876599067Z"
