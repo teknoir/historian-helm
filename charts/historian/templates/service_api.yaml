@@ -11,12 +11,15 @@ metadata:
   annotations:
     {{- toYaml $.Values.annotations | nindent 4 }}
 spec:
-  type: ClusterIP
+  type: {{ if .Values.nodePort.enabled }}NodePort{{ else }}ClusterIP{{ end }}
   ports:
     - name: http
       port: 8000
       protocol: TCP
       targetPort: 8000
+      {{- if .Values.nodePort.enabled }}
+      nodePort: 31380
+      {{- end }}
   selector:
     app: historian-api
   {{- end }}

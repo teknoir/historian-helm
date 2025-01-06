@@ -19,13 +19,35 @@ spec:
   chart: historian
   targetNamespace: default
   valuesContent: |-
-    # TBD
+    historianApi:
+      enabled: false
+    
+    metricsExporter:
+      enabled: false
+    
+    image:
+      repository: mongo
+      tag: 7.0.15
+    
+    annotations:
+      teknoir.org/managed-by: devstudio
+    resources:
+      limits:
+        cpu: 2000m
+        memory: 2048Mi
+      requests:
+        cpu: 200m
+        memory: 128Mi
+    nodePort:
+      enabled: false
+      nodePort: 31017
 ```
 
 ## Example values.yaml
 
 ```yaml
-# TBD
+nodePort:
+  enabled: true
 ```
 
 ## Adding the repository
